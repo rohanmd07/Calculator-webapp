@@ -4,12 +4,13 @@ let operand1;
 let operand2;
 let operator;
 let count = 0;
+let result;
 
 //perform different mathematical operations
 //=========================================
 
 function addition(a, b){
-    let result = a + b;
+    result = a + b;
     document.getElementById("display" + count).innerHTML = result;
     document.getElementById("display"+count).style.display = "block";
     operand1 = result;
@@ -17,7 +18,7 @@ function addition(a, b){
 }
 
 function subtraction(a, b){
-    let result = a - b;
+    result = a - b;
     document.getElementById("display" + count).innerHTML = result;
     document.getElementById("display"+count).style.display = "block";
     operand1 = result;
@@ -25,20 +26,41 @@ function subtraction(a, b){
 }
 
 function multiplication(a, b){
-    let result = a * b;
+    result = a * b;
     document.getElementById("display" + count).innerHTML = result;
-    document.getElementById("display"+count).style.display = "block";
+    document.getElementById("display"+ count).style.display = "block";
     operand1 = result;
     operand2 = undefined;
 }
 
 function divison(a, b){
-    let result = a / b;
+    result = a / b;
     document.getElementById("display" + count).innerHTML = result;
-    document.getElementById("display"+count).style.display = "block";
+    document.getElementById("display"+ count).style.display = "block";
     operand1 = result;
     operand2 = undefined;
 }
+
+function exponential(a, b){
+    result = Math.pow(a,b) ;
+    document.getElementById("display" + count).innerHTML = result;
+    document.getElementById("display"+ count).style.display = "block";
+    operand1 = result;
+    operand2 = undefined;
+}
+
+function squaretheNumber(){
+    result = Math.pow(result,2);
+    if(operator == undefined) result = Math.pow(Number(operand1),2);
+    for(let i=1;i<=count;i++) {
+    document.getElementById("display"+ i).style.display = "none";
+    }
+    count = 1;
+    document.getElementById("display" + count).innerHTML = result;
+    document.getElementById("display" + count).style.display = "block";
+    operand1 = result;
+    operand2 = undefined;
+}   
 
 
 //shows character
@@ -48,7 +70,6 @@ function showCharacter(a) {
     count++; 
     document.getElementById("display"+count).innerHTML = a;
     document.getElementById("display"+count).style.display = "block";
-   
 }
 
 // delete function
@@ -69,9 +90,9 @@ function deleteLastElement(){
 
 document.getElementById("1").onclick = function() {
     showCharacter(1);
-    if( operator === undefined){     
-        if(operand1 === undefined)  operand1 = "1";
-        else operand1 = operand1 + "1";
+    if( operator === undefined){                          // means we are still entering operand1
+        if(operand1 === undefined)  operand1 = "1";       // means we are entering the first digit of operand1       
+        else operand1 = operand1 + "1";                   // means we are concatenating '1' to the operand1 
     }else {
         if(operand2 === undefined)  operand2 = "1";
         else operand2 = operand2 + "1";
@@ -153,11 +174,11 @@ document.getElementById("7").onclick = function() {
 
 document.getElementById("8").onclick = function() {
     showCharacter(8);
-    if( operator === undefined){     
-        if(operand1 === undefined)  operand1 = "8";
-        else operand1 = operand1 + "8";
+    if( operator === undefined){                            
+        if(operand1 === undefined)  operand1 = "8";         
+        else operand1 = operand1 + "8";                   
     }else {
-        if(operand2 === undefined)  operand2 = "8";
+        if(operand2 === undefined)  operand2 = "8";         
         else operand2 = operand2 + "8";
     }
 };
@@ -222,6 +243,16 @@ document.getElementById("/").onclick = function() {
     operator = "/";
 };
 
+document.getElementById("^").onclick = function() {
+    showCharacter("^");
+    operator = "^";
+};
+
+document.getElementById("x2").onclick = function() {
+    squaretheNumber();
+};
+
+
 //prints "=" and calls appropriate function operations
 //====================================================
 
@@ -240,6 +271,9 @@ document.getElementById("=").onclick = function() {
     if(operator === "/"){
     divison(Number(operand1),Number(operand2));
     }
+    if(operator === "^"){
+    exponential(Number(operand1),Number(operand2));
+    }
 };
 
 
@@ -249,3 +283,4 @@ document.getElementById("=").onclick = function() {
 document.getElementById("DEL").onclick = function() {
     deleteLastElement();
 };
+
