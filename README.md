@@ -1,2 +1,3 @@
 # Calculator-webapp
-A simple calculator using HTML,CSS and JS
+A simple calculator 
+using basic HTML ,CSS and JS
